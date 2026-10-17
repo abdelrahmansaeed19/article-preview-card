@@ -42,7 +42,7 @@ body {
   border-radius: 1rem;
   background-color: white;
   box-shadow: 1rem 3rem 5rem rgba(0, 0, 0, 0.1);
-  /* width: 100%; */
+  width: 100%;
   max-width: 53rem;
   height: auto;
 }
@@ -50,6 +50,7 @@ body {
 .post-image {
   flex: 0 0 38%;
   min-width: 0;
+  max-width: 100%;
   height: auto;
   object-fit: cover;
   object-position: left center;
