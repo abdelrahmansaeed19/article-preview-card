@@ -1,0 +1,260 @@
+/* 1. CSS Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Makes padding/borders part of the element's width */
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Colors */
+
+  --color-blue-dark: hsl(217, 19%, 35%);
+  --color-blue-desaturated-dark: hsl(214, 17%, 51%);
+  --color-blue-grayish: hsl(212, 23%, 69%);
+  --color-blue-light-grayish: hsl(210, 46%, 95%);
+
+  /* Typography */
+  --font-family-manrope: "Manrope", sans-serif;
+  --font-size-base: 13px;
+  --font-weight-manrope-regular: 500;
+  --font-weight-manrope-bold: 700;
+}
+html {
+  font-family: var(--font-family-manrope);
+  font-size: var(--font-size-base); /* Responsive font size */
+  font-weight: var(--font-weight-manrope-regular);
+}
+
+body {
+  background-color: var(--color-blue-light-grayish);
+  font-size: min(1rem, 3.5vw);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1.5rem; /* Prevents card from touching edges on small screens */
+}
+
+.post {
+  display: flex;
+  border-radius: 1rem;
+  background-color: white;
+  box-shadow: 1rem 3rem 5rem rgba(0, 0, 0, 0.1);
+  /* width: 100%; */
+  max-width: 53rem;
+  height: auto;
+}
+
+.post-image {
+  flex: 0 0 38%;
+  min-width: 0;
+  height: auto;
+  object-fit: cover;
+  object-position: left center;
+  border-radius: 1rem 0 0 1rem;
+}
+
+.post-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.post-title {
+  font-size: 1.5rem;
+  color: var(--color-blue-dark);
+  margin: 2.5rem 2.5rem 1rem 2.5rem;
+}
+
+.post-text {
+  font-size: 1rem;
+  color: var(--color-blue-desaturated-dark);
+  margin: 0rem 2.5rem 1rem 2.5rem;
+}
+
+.post-author {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1rem 2.5rem 2.5rem 2.5rem;
+}
+
+.author-details {
+  display: inline-flex;
+}
+
+.author-image {
+  width: 35px;
+  height: 35px;
+  margin-right: 1rem;
+  border-radius: 50%;
+}
+
+.author-info {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  margin-right: 3rem;
+}
+
+.author-name {
+  font-weight: var(--font-weight-barlow-bold);
+  color: var(--color-blue-dark);
+}
+
+.post-date {
+  font-size: 0.875rem;
+  color: var(--color-blue-grayish);
+}
+
+.share-btn {
+  background-color: var(--color-blue-light-grayish);
+  display: inline-flex;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  width: 2.5rem;
+  height: 2.7rem;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.post-author.share-active .share-btn {
+  background-color: var(--color-blue-dark);
+}
+
+.share-btn:hover {
+  background-color: var(--color-blue-grayish);
+}
+
+.share-icon {
+  width: 15px;
+  height: 13px;
+  background-color: var(--color-blue-dark);
+  mask: url("../images/icon-share.svg") center / contain no-repeat;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+/* 
+.share-icon:hover {
+  background-color: var(--color-blue-light-grayish);
+} */
+
+.post-author.share-active .share-icon {
+  background-color: white;
+}
+
+.popup-share-links {
+  background-color: var(--color-blue-dark);
+  border-radius: 0.75rem;
+  padding: 1rem 2.5rem;
+  display: none;
+  color: var(--color-blue-grayish);
+  position: absolute;
+  bottom: 6rem;
+  right: -5.2rem;
+  transition: transform 0.2s ease;
+}
+
+.popup-share-links.share-active {
+  display: flex;
+  align-items: center;
+}
+
+.popup-share-links span {
+  letter-spacing: 0.3rem;
+  font-size: 0.875rem;
+}
+/* Little arrow pointing down at the button */
+.popup-share-links::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 7.25rem;
+  border: 0.6rem solid transparent;
+  border-top-color: var(--color-blue-dark);
+}
+
+@media (max-width: 48rem) {
+  .post {
+    flex-direction: column;
+  }
+
+  .post-image {
+    flex: none;
+    object-position: left right;
+    height: 15rem;
+    min-height: 0;
+    border-radius: 1rem 1rem 0 0;
+  }
+
+  .post-title {
+    font-size: 1.25rem;
+  }
+
+  .popup-share-links {
+    position: static;
+    border-radius: 0 0 0.75rem 0.75rem;
+    height: 5.2rem;
+  }
+
+  .post-author {
+    margin-bottom: 1.5rem;
+  }
+
+  .share-btn {
+    bottom: 1.25rem;
+  }
+
+  .popup-share-links::after {
+    content: none;
+  }
+
+  .post-author.share-active .share-btn {
+    background-color: var(--color-blue-desaturated-dark);
+  }
+
+  .post-author.share-active {
+    margin: 0;
+  }
+
+  .post-author.share-active .author-details {
+    display: none;
+  }
+}
+
+.social-icon {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 1rem;
+  background-color: white;
+  mask: var(--icon) center / contain no-repeat;
+  transition: background-color 0.2s;
+}
+
+.social-icon:hover {
+  background-color: var(--color-blue-grayish);
+}
+
+.social-facebook {
+  --icon: url("../images/icon-facebook.svg");
+}
+.social-twitter {
+  --icon: url("../images/icon-twitter.svg");
+}
+.social-pinterest {
+  --icon: url("../images/icon-pinterest.svg");
+}
